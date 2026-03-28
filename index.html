@@ -208,6 +208,31 @@
     @media (max-width: 580px) {
       .services-grid { grid-template-columns: 1fr; }
     }
+    /* ── Job title typewriter ── */
+#job-title {
+  display: inline-block;
+  background: linear-gradient(to right, #4acfee, #53f8c9, #6070fd, #5bbdff, #4acfee);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate-gradient 2.5s linear infinite;
+  transition: opacity 0.5s ease;
+}
+#job-title.fade {
+  opacity: 0;
+}
+
+/* ── Scroll fade-in for page sections ── */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
   </style>
 </head>
 <body>
@@ -237,7 +262,7 @@
       <div class="hero">
         <div class="hero-info">
           <h1 data-aos="fade-right" data-aos-duration="1000" data-aos-delay="700">Hi, I'm Hiroshi</h1>
-          <h2 data-aos="fade-left"  data-aos-duration="1000" data-aos-delay="900">I'm a Developer</h2>
+          <h2 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="900">I'm a <span id="job-title">AI & Automation Specialist</span></h2>
           <p data-aos="flip-down"   data-aos-duration="1000" data-aos-delay="1000">
             I am a Systems-Driven Specialist providing high-level support for corporate operations and creator growth. 
             I bridge the gap between technical precision and creative outreach to deliver measurable results for my clients.
@@ -247,10 +272,9 @@
           <div class="Buttons">
             <button class="btn" data-aos="zoom-in-right" data-aos-duration="1000" data-aos-delay="1100">Hire me</button>
             <ul class="ul-icons">
-              <li><a href=""><i class='bx bxl-github'></i></a></li>
-              <li><a href=""><i class='bx bxl-twitter'></i></a></li>
-              <li><a href=""><i class='bx bxl-youtube'></i></a></li>
-              <li><a href=""><i class='bx bxl-facebook-circle'></i></a></li>
+              <li><a href="https://linkedin.com/in/your-profile" target="_blank"><i class='bx bxl-linkedin'></i></a></li>
+              <li><a href="https://onlinejobs.ph/jobseekers/info/0000000" target="_blank"><i class='bx bx-briefcase'></i></a></li>
+              <li><a href="https://jobstreet.com.ph/en/profile/your-profile" target="_blank"><i class='bx bx-search-alt'></i></a></li>
             </ul>
           </div>
         </div>
@@ -277,34 +301,34 @@
 
         <div class="services-grid">
           <div class="service-card">
-            <div class="service-icon"><i class='bx bx-task'></i></div>
-            <h3>Virtual Assistant</h3>
-            <p>Providing high-level executive and administrative support — calendar management, inbox handling, data entry, and keeping operations running smoothly day to day.</p>
+            <div class="service-icon"><i class='bx bx-bot'></i></div>
+            <h3>AI & Automation Specialist</h3>
+            <p>Leveraging AI tools and automation platforms like Zapier and Make to streamline workflows, eliminate repetitive tasks, and build smarter systems for your business.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class='bx bx-layout'></i></div>
+            <h3>Website Design & Page Layout</h3>
+            <p>Designing clean, on-brand website layouts and landing pages optimized for user experience, visual clarity, and conversion — no clutter, just results.</p>
           </div>
           <div class="service-card">
             <div class="service-icon"><i class='bx bxl-instagram-alt'></i></div>
-            <h3>Social Media Management</h3>
-            <p>Managing daily content, scheduling posts, engaging with communities, and growing your brand presence across major platforms.</p>
+            <h3>Social Media Manager</h3>
+            <p>Managing content creation, scheduling, community engagement, and growth strategy across platforms to build your brand presence consistently.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class='bx bx-video'></i></div>
-            <h3>Video Editing</h3>
-            <p>Editing short-form and long-form videos for YouTube, social media, and business use — with attention to pacing, transitions, and storytelling.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class='bx bxl-shopify'></i></div>
-            <h3>Shopify VA</h3>
-            <p>Handling product listings, order management, customer support, and store maintenance to keep your e-commerce operations running without a hitch.</p>
+            <div class="service-icon"><i class='bx bx-target-lock'></i></div>
+            <h3>Lead Generation & Outreach Specialist</h3>
+            <p>Identifying and qualifying prospects, crafting outreach messages, and building pipelines that turn cold contacts into warm opportunities for your business.</p>
           </div>
           <div class="service-card">
             <div class="service-icon"><i class='bx bx-file'></i></div>
-            <h3>Technical Document Building</h3>
-            <p>Creating structured professional documents — SOPs, reports, and technical write-ups — formatted clearly and accurately from rough notes or briefs.</p>
+            <h3>Technical Document Specialist</h3>
+            <p>Creating structured, accurate, and professional documentation — SOPs, reports, guides, and technical write-ups — formatted clearly from rough notes or briefs.</p>
           </div>
           <div class="service-card">
-            <div class="service-icon"><i class='bx bx-cog'></i></div>
-            <h3>Workflow Automation</h3>
-            <p>Setting up automations using tools like Zapier and Make to eliminate repetitive tasks and connect your apps so your team can focus on what matters.</p>
+            <div class="service-icon"><i class='bx bx-headphone'></i></div>
+            <h3>Virtual Assistant</h3>
+            <p>Providing reliable, high-level administrative and executive support — inbox and calendar management, data entry, research, and keeping your operations running smoothly.</p>
           </div>
         </div>
       </div>
@@ -444,42 +468,105 @@
           </div>
 
           <div>
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bx-bot'></i> AI & Automation</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bx-brain'></i> Claude</div>
+                <div class="tech-pill"><i class='bx bx-brain'></i> ChatGPT</div>
+                <div class="tech-pill"><i class='bx bx-link'></i> Zapier</div>
+                <div class="tech-pill"><i class='bx bx-link'></i> Make</div>
+                <div class="tech-pill"><i class='bx bx-check'></i> Grammarly</div>
+                <div class="tech-pill"><i class='bx bx-cog'></i> Notion AI</div>
+              </div>
+            </div>
+
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bx-layout'></i> Website Design & Layout</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bxl-figma'></i> Figma</div>
+                <div class="tech-pill"><i class='bx bx-brush'></i> Canva</div>
+                <div class="tech-pill"><i class='bx bx-brush-alt'></i> Affinity</div>
+                <div class="tech-pill"><i class='bx bxl-wordpress'></i> WordPress</div>
+                <div class="tech-pill"><i class='bx bxl-shopify'></i> Shopify</div>
+              </div>
+            </div>
+
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bxl-instagram'></i> Social Media</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bxl-instagram'></i> Instagram</div>
+                <div class="tech-pill"><i class='bx bxl-facebook'></i> Facebook</div>
+                <div class="tech-pill"><i class='bx bxl-tiktok'></i> TikTok</div>
+                <div class="tech-pill"><i class='bx bxl-youtube'></i> YouTube</div>
+                <div class="tech-pill"><i class='bx bxl-linkedin'></i> LinkedIn</div>
+                <div class="tech-pill"><i class='bx bx-calendar'></i> Buffer</div>
+                <div class="tech-pill"><i class='bx bx-calendar-check'></i> Later</div>
+              </div>
+            </div>
+
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bx-target-lock'></i> Lead Generation & Outreach</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bxl-linkedin'></i> LinkedIn Sales Nav</div>
+                <div class="tech-pill"><i class='bx bx-search'></i> Hunter.io</div>
+                <div class="tech-pill"><i class='bx bx-envelope'></i> Instantly</div>
+                <div class="tech-pill"><i class='bx bx-data'></i> Apollo.io</div>
+                <div class="tech-pill"><i class='bx bx-table'></i> Airtable</div>
+              </div>
+            </div>
+
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bx-file'></i> Technical Documentation</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bxl-microsoft'></i> Microsoft Office</div>
+                <div class="tech-pill"><i class='bx bxl-google'></i> Google Workspace</div>
+                <div class="tech-pill"><i class='bx bx-notepad'></i> Notion</div>
+                <div class="tech-pill"><i class='bx bx-check'></i> Grammarly</div>
+              </div>
+            </div>
+
+            <div class="tech-section">
+              <h3 class="tech-section-title"><i class='bx bx-headphone'></i> Virtual Assistant & Admin</h3>
+              <div class="tech-grid">
+                <div class="tech-pill"><i class='bx bxl-trello'></i> Trello</div>
+                <div class="tech-pill"><i class='bx bx-check-square'></i> ClickUp</div>
+                <div class="tech-pill"><i class='bx bx-grid'></i> Monday.com</div>
+                <div class="tech-pill"><i class='bx bxl-slack'></i> Slack</div>
+                <div class="tech-pill"><i class='bx bx-video'></i> Zoom</div>
+                <div class="tech-pill"><i class='bx bx-play-circle'></i> Loom</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
             <h3 class="tech-section-title"><i class='bx bx-bar-chart-alt-2'></i> Proficiency</h3>
             <div id="skill-bars">
               <div class="bar-item">
-                <div class="bar-label"><span>Executive & Admin Support</span><span>90%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="90%"></div></div>
+                <div class="bar-label"><span>AI & Automation</span><span>85%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="85%"></div></div>
+              </div>
+              <div class="bar-item">
+                <div class="bar-label"><span>Website Design & Layout</span><span>80%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="80%"></div></div>
               </div>
               <div class="bar-item">
                 <div class="bar-label"><span>Social Media Management</span><span>85%</span></div>
                 <div class="bar-track"><div class="bar-fill" data-width="85%"></div></div>
               </div>
               <div class="bar-item">
-                <div class="bar-label"><span>Video Editing</span><span>80%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="80%"></div></div>
-              </div>
-              <div class="bar-item">
-                <div class="bar-label"><span>Design (Canva / Figma)</span><span>75%</span></div>
+                <div class="bar-label"><span>Lead Generation & Outreach</span><span>75%</span></div>
                 <div class="bar-track"><div class="bar-fill" data-width="75%"></div></div>
               </div>
               <div class="bar-item">
-                <div class="bar-label"><span>Shopify / E-Commerce</span><span>75%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="75%"></div></div>
+                <div class="bar-label"><span>Technical Documentation</span><span>90%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="90%"></div></div>
               </div>
               <div class="bar-item">
-                <div class="bar-label"><span>Automation (Zapier / Make)</span><span>70%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="70%"></div></div>
-              </div>
-              <div class="bar-item">
-                <div class="bar-label"><span>AI Tools</span><span>85%</span></div>
-                <div class="bar-track"><div class="bar-fill" data-width="85%"></div></div>
+                <div class="bar-label"><span>Virtual Assistant & Admin</span><span>90%</span></div>
+                <div class="bar-track"><div class="bar-fill" data-width="90%"></div></div>
               </div>
             </div>
           </div>
-
-        </div>
-      </div>
-    </div>
 
     <!-- ══════════════════════════════════════
          CONTACT
@@ -493,7 +580,7 @@
 
           <div class="contact-info">
             <h3>Let's work together</h3>
-            <p>I'm currently open for freelance projects and remote opportunities. Whether you need a reliable VA, a video editor, or help running your Shopify store — feel free to reach out.</p>
+            <p>I'm currently open for freelance projects and remote opportunities. Whether you need a reliable VA, a social media manager, or an automation specialist — feel free to reach out.</p>
 
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class='bx bx-envelope'></i></div>
@@ -503,16 +590,13 @@
                 <p>hiroshi@example.com</p>
               </div>
             </div>
-
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class='bx bx-map'></i></div>
               <div class="contact-detail-text">
                 <span>Location</span>
-                <!-- Replace with your actual location -->
                 <p>Philippines</p>
               </div>
             </div>
-
             <div class="contact-detail">
               <div class="contact-detail-icon"><i class='bx bx-time'></i></div>
               <div class="contact-detail-text">
@@ -522,19 +606,30 @@
             </div>
 
             <div class="social-links">
-              <a href=""><i class='bx bxl-github'></i></a>
-              <a href=""><i class='bx bxl-twitter'></i></a>
-              <a href=""><i class='bx bxl-youtube'></i></a>
-              <a href=""><i class='bx bxl-facebook-circle'></i></a>
+              <a href="https://linkedin.com/in/your-profile" target="_blank"><i class='bx bxl-linkedin'></i></a>
+              <a href="https://onlinejobs.ph/jobseekers/info/0000000" target="_blank"><i class='bx bx-briefcase'></i></a>
+              <a href="https://jobstreet.com.ph/en/profile/your-profile" target="_blank"><i class='bx bx-search-alt'></i></a>
             </div>
           </div>
 
           <div class="contact-cta">
             <h3>Send me a message</h3>
-            <p>Click the button below to open the contact form. Fill in your email and message and I'll get back to you as soon as possible.</p>
-            <button class="open-form-btn" onclick="document.querySelector('.formbutton-button').click()">
-              <i class='bx bx-send'></i> Open Contact Form
-            </button>
+            <p>Fill in the form below and I'll get back to you as soon as possible.</p>
+
+            <form action="https://formspree.io/f/xqegawye" method="POST" class="contact-form">
+              <div class="form-group">
+                <label>Your email</label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label>Your message</label>
+                <textarea name="message" placeholder="What's on your mind?" rows="4"></textarea>
+              </div>
+              <button type="submit" class="open-form-btn">
+                <i class='bx bx-send'></i> Send Message
+              </button>
+            </form>
+
             <div class="availability-badge">
               <div class="availability-dot"></div>
               Available for new projects
@@ -570,17 +665,48 @@
   <script>
     AOS.init();
 
+    // ── Job title rotator ──
+    const titles = [
+      "AI & Automation Specialist",
+      "Website Design & Page Layout",
+      "Social Media Manager",
+      "Lead Generation & Outreach Specialist",
+      "Technical Document Specialist",
+      "Virtual Assistant"
+    ];
+    let titleIndex = 0;
+    const titleEl = document.getElementById('job-title');
+    setInterval(() => {
+      titleEl.classList.add('fade');
+      setTimeout(() => {
+        titleIndex = (titleIndex + 1) % titles.length;
+        titleEl.textContent = titles[titleIndex];
+        titleEl.classList.remove('fade');
+      }, 500);
+    }, 2500);
+
     // ── SPA navigation ──
     const navLinks = document.querySelectorAll('nav a[data-page]');
     const pages    = document.querySelectorAll('.page');
 
+    function triggerFadeIns(pageEl) {
+      const items = pageEl.querySelectorAll('.service-card, .timeline-item, .tech-section, .tech-pill, .bar-item, .contact-detail, .contact-cta, .page-title, .page-subtitle');
+      items.forEach(el => el.classList.add('fade-in-section'));
+      setTimeout(() => {
+        items.forEach((el, i) => {
+          setTimeout(() => el.classList.add('visible'), i * 60);
+        });
+      }, 50);
+    }
+
     function showPage(pageId) {
       pages.forEach(p    => p.classList.remove('active'));
       navLinks.forEach(a => a.classList.remove('active'));
-      document.getElementById('page-' + pageId).classList.add('active');
+      const target = document.getElementById('page-' + pageId);
+      target.classList.add('active');
       document.querySelector(`a[data-page="${pageId}"]`).classList.add('active');
+      triggerFadeIns(target);
 
-      // Animate skill bars each time tech page opens
       if (pageId === 'tech') {
         setTimeout(() => {
           document.querySelectorAll('.bar-fill').forEach(bar => {
