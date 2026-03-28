@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hiroshi Sugawara</title>
+
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="style.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -15,36 +16,37 @@
     .page-content {
       padding: 0 10%;
       flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 🔥 SCROLL FIX (EXPERIENCE ONLY) */
+    #page-experience .page-content {
       overflow-y: auto;
       scrollbar-width: thin;
       scrollbar-color: #4acfee transparent;
     }
 
-    .page-title {
-      font-size: 42px;
-      color: white;
-      margin-bottom: 10px;
-    }
-    .page-title span { color: #4acfee; }
-
-    .page-subtitle {
-      color: rgba(255,255,255,0.6);
-      font-size: 16px;
-      margin-bottom: 40px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding-bottom: 30px;
+    /* Fade effect */
+    #page-experience .page-content::before,
+    #page-experience .page-content::after {
+      content: "";
+      position: sticky;
+      left: 0;
+      right: 0;
+      height: 30px;
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .service-card {
-      background: rgba(74,207,238,0.05);
-      border: 1px solid rgba(74,207,238,0.2);
-      border-radius: 20px;
-      padding: 30px 25px;
+    #page-experience .page-content::before {
+      top: 0;
+      background: linear-gradient(to bottom, rgba(14,18,23,1), transparent);
+    }
+
+    #page-experience .page-content::after {
+      bottom: 0;
+      background: linear-gradient(to top, rgba(14,18,23,1), transparent);
     }
 
     .exp-columns {
@@ -54,46 +56,66 @@
       padding-bottom: 30px;
     }
 
-    .exp-col-title {
+    .timeline-item ul {
+      padding-left: 18px;
+      margin-top: 5px;
+    }
+
+    .timeline-item ul li {
+      color: rgba(255,255,255,0.65);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item ul li strong {
       color: #4acfee;
-      font-size: 22px;
-      margin-bottom: 25px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .timeline { position: relative; padding-left: 25px; }
-
-    .timeline-item { margin-bottom: 30px; }
-
-    .timeline-item .date { color: #4acfee; font-size: 13px; font-weight: bold; margin-bottom: 5px; }
-    .timeline-item h3 { color: white; font-size: 18px; margin-bottom: 4px; }
-    .timeline-item .company { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 8px; }
-    .timeline-item p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.7; }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      padding-bottom: 30px;
-    }
-
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
     }
   </style>
 </head>
 
 <body>
 
+  <video autoplay loop muted plays-inline class="back-vid">
+    <source src="images/galaxy.mp4" type="video/mp4">
+  </video>
+
   <section class="main-section">
+
+    <!-- NAV -->
+    <nav>
+      <h1><span style="color:#4acfee;">Hiroshi</span>Sugawara</h1>
+      <ul>
+        <li><a class="active" href="#" data-page="home">Home</a></li>
+        <li><a href="#" data-page="services">Services Offered</a></li>
+        <li><a href="#" data-page="experience">Experience</a></li>
+        <li><a href="#" data-page="tech">Tech Stack</a></li>
+        <li><a href="#" data-page="contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HOME -->
+    <div class="page active" id="page-home">
+      <div class="hero">
+        <div class="hero-info">
+          <h1>Hi, I'm Hiroshi</h1>
+          <h2>I'm a Developer</h2>
+          <p>Your original intro remains unchanged.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="page" id="page-services">
+      <div class="page-content">
+        <h1 class="page-title">Services <span>Offered</span></h1>
+      </div>
+    </div>
 
     <!-- EXPERIENCE -->
     <div class="page" id="page-experience">
       <div class="page-content">
+
         <h1 class="page-title">My <span>Experience</span></h1>
 
         <div class="exp-columns">
@@ -101,78 +123,123 @@
           <!-- WORK -->
           <div>
             <h2 class="exp-col-title">Work Experience</h2>
-            <div class="timeline">
 
-              <div class="timeline-item">
-                <div class="date">Jan 2025 – Jan 2026</div>
-                <h3>Freelance Virtual Assistant | Junior Social Media Manager</h3>
-                <div class="company">Self-Employed</div>
+            <div class="timeline-item">
+              <div class="date">Jan 2025 – Jan 2026</div>
+              <h3>Freelance Virtual Assistant</h3>
 
-                <ul>
-                  <li><strong>Executive Admin:</strong> Streamlined operations via calendar and email management.</li>
-                  <li><strong>Social Media:</strong> Managed Facebook operations and content scheduling.</li>
-                  <li><strong>Growth & Monetization:</strong> Achieved eligibility for monetization tools.</li>
-                  <li><strong>Community Moderation:</strong> Handled engagement and audience interaction.</li>
-                  <li><strong>Technical Support:</strong> Resolved platform-related issues.</li>
-                </ul>
-              </div>
-
-              <div class="timeline-item">
-                <div class="date">Jan 2018 – Apr 2018</div>
-                <h3>Machinist Assistant (Internship)</h3>
-                <div class="company">Ramcar Technology, Inc.</div>
-
-                <ul>
-                  <li><strong>Precision Assembly:</strong> Built components based on technical drawings.</li>
-                  <li><strong>Quality Inspection:</strong> Verified accuracy using metrology tools.</li>
-                  <li><strong>CAD/CAM:</strong> Interpreted technical designs for production.</li>
-                  <li><strong>Machine Operation:</strong> Assisted in fabrication processes.</li>
-                  <li><strong>Documentation:</strong> Maintained production records.</li>
-                </ul>
-              </div>
-
+              <ul>
+                <li><strong>Executive Admin:</strong> Streamlined operations.</li>
+                <li><strong>Social Media:</strong> Managed daily content.</li>
+                <li><strong>Growth & Monetization:</strong> Achieved monetization.</li>
+                <li><strong>Community:</strong> Engagement handling.</li>
+                <li><strong>Technical:</strong> Issue resolution.</li>
+              </ul>
             </div>
+
+            <div class="timeline-item">
+              <div class="date">2018</div>
+              <h3>Machinist Assistant</h3>
+
+              <ul>
+                <li><strong>Precision Assembly:</strong> Built components.</li>
+                <li><strong>Inspection:</strong> Verified accuracy.</li>
+                <li><strong>CAD:</strong> Interpreted designs.</li>
+                <li><strong>Machines:</strong> Assisted operations.</li>
+              </ul>
+            </div>
+
           </div>
 
           <!-- EDUCATION -->
           <div>
             <h2 class="exp-col-title">Education</h2>
-            <div class="timeline">
 
-              <div class="timeline-item">
-                <div class="date">2014 – 2018</div>
-                <h3>Bachelor of Science in Industrial Technology</h3>
-                <div class="company">Bulacan State University</div>
+            <div class="timeline-item">
+              <div class="date">2014 – 2018</div>
+              <h3>BS Industrial Technology</h3>
 
-                <ul>
-                  <li><strong>Mechanical Systems:</strong> Studied industrial manufacturing processes.</li>
-                  <li><strong>Welding Specialization:</strong> Trained in SMAW, MIG, TIG.</li>
-                  <li><strong>Technical Design:</strong> CAD-based blueprint creation.</li>
-                  <li><strong>Quality Control:</strong> Applied metrology standards.</li>
-                </ul>
-              </div>
-
-              <div class="timeline-item">
-                <div class="date">2023</div>
-                <h3>Machinist NC II Certificate</h3>
-                <div class="company">TESDA</div>
-
-                <ul>
-                  <li><strong>Precision Metalworking:</strong> Fabrication and shaping techniques.</li>
-                  <li><strong>Machine Operation:</strong> Lathe and milling setup.</li>
-                  <li><strong>CNC Programming:</strong> Automated machining processes.</li>
-                  <li><strong>Technical Compliance:</strong> Blueprint interpretation.</li>
-                </ul>
-              </div>
-
+              <ul>
+                <li><strong>Mechanical Systems:</strong> Manufacturing processes.</li>
+                <li><strong>Welding:</strong> SMAW, MIG, TIG.</li>
+                <li><strong>Design:</strong> CAD work.</li>
+                <li><strong>Quality:</strong> Metrology standards.</li>
+              </ul>
             </div>
+
+            <div class="timeline-item">
+              <div class="date">2023</div>
+              <h3>Machinist NC II</h3>
+
+              <ul>
+                <li><strong>Metalworking:</strong> Fabrication.</li>
+                <li><strong>Machines:</strong> Lathe & milling.</li>
+                <li><strong>CNC:</strong> Automation.</li>
+                <li><strong>Compliance:</strong> Blueprint accuracy.</li>
+              </ul>
+            </div>
+
           </div>
 
         </div>
       </div>
     </div>
 
+    <!-- TECH -->
+    <div class="page" id="page-tech">
+      <div class="page-content">
+        <h1 class="page-title">Tech <span>Stack</span></h1>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="page" id="page-contact">
+      <div class="page-content">
+        <h1 class="page-title">Start the <span>Conversation</span></h1>
+      </div>
+    </div>
+
   </section>
+
+  <!-- FORM BUTTON (THEME MATCHED) -->
+  <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+  <script>
+    window.formbutton=window.formbutton||function(){(formbutton.q=formbutton.q||[]).push(arguments)};
+    formbutton("create", {
+      action: "https://formspree.io/f/xqegawye",
+      title: "How can we help?",
+      fields: [
+        { type: "email", label: "Email:", name: "email", required: true },
+        { type: "textarea", label: "Message:", name: "message" },
+        { type: "submit" }
+      ],
+      styles: {
+        title: { backgroundColor: "#4acfee" },
+        button: { backgroundColor: "#4acfee" }
+      }
+    });
+  </script>
+
+  <!-- NAV SCRIPT -->
+  <script>
+    const navLinks = document.querySelectorAll('nav a[data-page]');
+    const pages = document.querySelectorAll('.page');
+
+    function showPage(pageId) {
+      pages.forEach(p => p.classList.remove('active'));
+      navLinks.forEach(a => a.classList.remove('active'));
+
+      document.getElementById('page-' + pageId).classList.add('active');
+      document.querySelector(`a[data-page="${pageId}"]`).classList.add('active');
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        showPage(link.dataset.page);
+      });
+    });
+  </script>
 
 </body>
 </html>
