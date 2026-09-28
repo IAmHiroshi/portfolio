@@ -506,6 +506,54 @@
       }
     }
 
+    /* ════════════ SAMPLE CARDS (Work Portfolio / Concept Samples) ════════════ */
+    .sample-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      border: 1px dashed rgba(74, 207, 238, 0.35);
+      background: rgba(74, 207, 238, 0.05);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .sample-img span {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .sample-img img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sample-tag {
+      display: inline-block;
+      color: #4acfee;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    /* 7 nav items: tighten spacing on mid-size desktops only */
+    @media (min-width: 981px) and (max-width: 1500px) {
+      nav a {
+        padding: 0 12px;
+        font-size: 17px;
+      }
+    }
+
     /* ════════════ HAMBURGER + MOBILE NAV ════════════ */
     .hamburger {
       display: none;
@@ -661,10 +709,14 @@
         <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"><a href="#" data-page="services">Services
             Offered</a></li>
         <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300"><a href="#"
-            data-page="experience">Experience</a></li>
-        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#" data-page="tech">Tech Stack</a>
+            data-page="experience">Career History</a></li>
+        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"><a href="#"
+            data-page="portfolio">Work Portfolio</a></li>
+        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="#"
+            data-page="concepts">Concept Samples</a></li>
+        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"><a href="#" data-page="tech">Tech Stack</a>
         </li>
-        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500"><a href="#" data-page="contact">Contact</a>
+        <li data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700"><a href="#" data-page="contact">Contact</a>
         </li>
       </ul>
       <button class="hamburger" aria-label="Open menu"
@@ -676,7 +728,9 @@
     <div class="mobile-menu">
       <a href="#" data-page="home" class="mob-link active">Home</a>
       <a href="#" data-page="services" class="mob-link">Services Offered</a>
-      <a href="#" data-page="experience" class="mob-link">Experience</a>
+      <a href="#" data-page="experience" class="mob-link">Career History</a>
+      <a href="#" data-page="portfolio" class="mob-link">Work Portfolio</a>
+      <a href="#" data-page="concepts" class="mob-link">Concept Samples</a>
       <a href="#" data-page="tech" class="mob-link">Tech Stack</a>
       <a href="#" data-page="contact" class="mob-link">Contact</a>
     </div>
@@ -792,7 +846,7 @@
     ══════════════════════════════════════ -->
     <div class="page" id="page-experience">
       <div class="page-content">
-        <h1 class="page-title">My <span>Experience</span></h1>
+        <h1 class="page-title">Career <span>History</span></h1>
         <p class="page-subtitle">A timeline of my professional journey and academic background.</p>
 
         <div class="exp-columns">
@@ -935,6 +989,113 @@
     </div> <!-- Closes #page-experience -->
 
     <!-- ══════════════════════════════════════
+         WORK PORTFOLIO
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-portfolio">
+      <div class="page-content">
+        <h1 class="page-title">Work <span>Portfolio</span></h1>
+        <p class="page-subtitle">Samples from my real work. Each one shows the process and the results.</p>
+
+        <div class="services-grid">
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: video annotation<br>(images/portfolio/video-annotation.png)</span>
+              <img src="images/portfolio/video-annotation.png" alt="Video Annotation & QA" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Sample 01</div>
+            <h3>Video Annotation & QA</h3>
+            <p>Segmenting first-person wearable-camera footage into task-based episodes, classifying each cut against structured criteria, and logging metadata such as categories, object attributes, and summary captions. Includes QA review of peer annotations to catch oversegmentation and timestamp errors.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: Google Sheet<br>(images/portfolio/sports-data-audit.png)</span>
+              <img src="images/portfolio/sports-data-audit.png" alt="Sports Data Research & Audit Specialist" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Sample 02</div>
+            <h3>Sports Data Research & Audit Specialist</h3>
+            <p>A researched database of 300+ organizations, with multiple verified data points per profile. Roster data was audited for missing information and marked with standardized flags, backed by research notes and audit logs showing the source and verification status of every entry.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: follower growth / analytics<br>(images/portfolio/social-growth.png)</span>
+              <img src="images/portfolio/social-growth.png" alt="Social Media Manager" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Sample 03</div>
+            <h3>Social Media Manager</h3>
+            <p>Daily scheduling, community engagement, and moderation across LinkedIn, Facebook, and Instagram in a consistent brand voice. Audience growth passed 10,000 followers and unlocked all platform monetization features for the client.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CONCEPT SAMPLES
+    ══════════════════════════════════════ -->
+    <div class="page" id="page-concepts">
+      <div class="page-content">
+        <h1 class="page-title">Concept <span>Samples</span></h1>
+        <p class="page-subtitle">Concept pieces made to show my skills across the roles I offer.</p>
+
+        <div class="services-grid">
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: Canva graphics<br>(images/concepts/canva-graphics.png)</span>
+              <img src="images/concepts/canva-graphics.png" alt="Graphic Design (Canva)" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 01</div>
+            <h3>Graphic Design (Canva)</h3>
+            <p>Sample social media graphics, banners, and branded post templates designed in Canva to show layout, color, and typography consistency across a brand feed.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: script text<br>(images/concepts/scriptwriting.png)</span>
+              <img src="images/concepts/scriptwriting.png" alt="Scriptwriting & Copywriting" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 02</div>
+            <h3>Scriptwriting & Copywriting</h3>
+            <p>Sample short-form video scripts and post captions written with a clear hook, message, and call to action, adapted to different brand voices and platforms.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: Shopify store page<br>(images/concepts/shopify-store.png)</span>
+              <img src="images/concepts/shopify-store.png" alt="Shopify Sample Store Page" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 03</div>
+            <h3>Shopify Sample Store Page</h3>
+            <p>A concept storefront with a product page, collection layout, and clean product descriptions, showing basic store setup and page building.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: prospect list / outreach sequence<br>(images/concepts/lead-generation.png)</span>
+              <img src="images/concepts/lead-generation.png" alt="Lead Generation & Outreach Pipeline" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 04</div>
+            <h3>Lead Generation & Outreach Pipeline</h3>
+            <p>A sample prospect list built with LinkedIn Sales Navigator and Apollo.io, paired with a multi-step outreach message sequence and a simple pipeline tracker. Uses placeholder data only.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: email / ticket templates<br>(images/concepts/support-templates.png)</span>
+              <img src="images/concepts/support-templates.png" alt="Customer Support Reply Templates" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 05</div>
+            <h3>Customer Support Reply Templates</h3>
+            <p>A set of professional email and ticket response templates for common inquiries, written to keep a consistent brand tone while resolving issues clearly and quickly.</p>
+          </div>
+          <div class="service-card fade-in-item">
+            <div class="sample-img">
+              <span>Screenshot: SOP document<br>(images/concepts/sop-manual.png)</span>
+              <img src="images/concepts/sop-manual.png" alt="SOP & Operations Manual" onerror="this.style.display='none'">
+            </div>
+            <div class="sample-tag">Concept 06</div>
+            <h3>SOP & Operations Manual</h3>
+            <p>A sample step-by-step standard operating procedure with a criteria checklist and revision log, reflecting the annotation playbook maintenance done in my current role. Content is generic and non-confidential.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
          TECH STACK
     ══════════════════════════════════════ -->
     <div class="page" id="page-tech">
@@ -955,13 +1116,6 @@
                 <div class="tech-pill"><i class='bx bxl-tiktok'></i> TikTok</div>
                 <div class="tech-pill"><i class='bx bxl-youtube'></i> YouTube</div>
                 <div class="tech-pill"><i class='bx bxl-twitter'></i> X (Twitter)</div>
-              </div>
-            </div>
-
-            <div class="tech-section fade-in-item">
-              <h3 class="tech-section-title"><i class='bx bx-video'></i> Video Annotation</h3>
-              <div class="tech-grid">
-                <div class="tech-pill"><i class='bx bx-window-alt'></i> RoboCap Reviewer</div>
               </div>
             </div>
 
