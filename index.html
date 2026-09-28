@@ -529,7 +529,8 @@
       line-height: 1.5;
     }
 
-    .sample-img img {
+    .sample-img img,
+    .sample-img video {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -544,6 +545,161 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 6px;
+    }
+
+    /* Click-to-expand sample cards */
+    .sample-card {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .sample-card:focus-visible {
+      outline: 2px solid #4acfee;
+      outline-offset: 2px;
+    }
+
+    .sample-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      color: #4acfee;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sample-close {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 18px;
+      background: transparent;
+      border: 2px solid #4acfee;
+      border-radius: 40px;
+      color: #4acfee;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .sample-close:hover {
+      background: #4acfee;
+      color: #0e1217;
+      box-shadow: 0 0 10px #4acfee;
+    }
+
+    .sample-gallery {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .sample-item .sample-img {
+      margin-bottom: 8px;
+    }
+
+    .sample-item .sample-img img {
+      object-fit: contain;
+    }
+
+    .sample-item .sample-img video {
+      object-fit: contain;
+      background: #000;
+    }
+
+    .sample-caption {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .sample-text {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      margin-bottom: 8px;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px dashed rgba(74, 207, 238, 0.35);
+      background: rgba(74, 207, 238, 0.05);
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 12px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #4acfee transparent;
+    }
+
+    .sample-text.loaded {
+      border-style: solid;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* open / close states */
+    .services-grid .sample-card.away {
+      opacity: 0;
+      transform: scale(0.92) translateY(10px);
+      pointer-events: none;
+    }
+
+    .services-grid .sample-card.gone {
+      display: none;
+    }
+
+    .services-grid .sample-card.open {
+      grid-column: 1 / -1;
+      cursor: default;
+      animation: sampleExpand 0.45s ease;
+    }
+
+    .services-grid .sample-card.open:hover {
+      transform: none;
+    }
+
+    .sample-card.open .sample-close {
+      display: inline-flex;
+    }
+
+    .sample-card.open .sample-cover,
+    .sample-card.open .sample-more {
+      display: none;
+    }
+
+    .sample-card.open .sample-gallery {
+      display: grid;
+    }
+
+    .sample-card.open .sample-item {
+      animation: sampleItemIn 0.5s ease both;
+    }
+
+    @keyframes sampleExpand {
+      from {
+        opacity: 0.4;
+        transform: scale(0.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes sampleItemIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* 7 nav items: tighten spacing on mid-size desktops only */
@@ -798,7 +954,7 @@
 
         <div class="services-grid">
            <div class="service-card fade-in-item">
-        <div class="service-icon"><i class='bx bx-video-recording'></i></div>
+        <div class="service-icon"><i class='bx bx-check-shield'></i></div>
         <h3>Data Operations & Quality Assurance</h3>
         <p>Reviewing high-volume digital datasets, executing strict metadata tagging, and auditing content usability parameters against structured multi-part criteria layouts. 
         I focus on maintaining precise documentation logs and updating operational manuals to ensure absolute database consistency and data integrity.</p>
@@ -818,7 +974,7 @@
               records for your business operations.</p>
           </div>
           <div class="service-card fade-in-item">
-            <div class="service-icon"><i class='bx bxl-instagram-alt'></i></div>
+            <div class="service-icon"><i class='bx bx-user-plus'></i></div>
             <h3>Lead Generation & Outreach Specialist</h3>
             <p>Identifying and qualifying prospects, crafting targeted outreach messages, and building pipelines that
               convert cold contacts into warm, ready-to-close opportunities.</p>
@@ -957,7 +1113,39 @@
               <h2 class="exp-col-title"><i class='bx bx-certification'></i> Certifications</h2>
               <div class="timeline">
                 <div class="timeline-item">
-                  <div class="date">2026</div>
+                  <div class="date">Sep 2026</div>
+                  <h3>Crystal Knows Personality Assessment</h3>
+                  <ul>
+                    <li><strong>Profile Result:</strong> Cs · Editor — described as pragmatic, reliable, and very
+                      organized, with the traits Diligent, Meticulous, and Collected.</li>
+                    <li><strong>Methodical Decision-Making:</strong> Gathers all relevant information and maps a clear
+                      plan before acting, which makes me great at spotting risks and inconsistencies others might
+                      miss.</li>
+                    <li><strong>Autonomous Reliability:</strong> Works independently with a structured, organized
+                      process, which makes me great at delivering consistent, high-quality results without close
+                      supervision.</li>
+                    <li><strong>Refinement Strength:</strong> Known for meticulous attention to detail when improving
+                      existing materials, which makes me great at editing, QA review, and documentation upkeep.</li>
+                  </ul>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="date">Aug 2026</div>
+                  <h3>DISC Behavioral Style Assessment</h3>
+                  <ul>
+                    <li><strong>Style Blend Result:</strong> D/S/C — Dominant, Supportive, and Cautious. Cautious
+                      showed as the most consistent style in my adapted work behavior.</li>
+                    <li><strong>Cautious (C) Focus on Facts and Rules:</strong> A focus on facts, rules, and
+                      correctness, which makes me great at following strict SOPs, data auditing, and QA work.</li>
+                    <li><strong>Task-Oriented Doer:</strong> Described as logical, analytical, and helpful, which
+                      makes me great at solving problems and getting things done while preserving relationships.</li>
+                    <li><strong>Supportive (S) Steadiness:</strong> A steady, harmony-preserving approach, which makes
+                      me great at long-term client support and reliable day-to-day communication.</li>
+                  </ul>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="date">Jun 2026</div>
                   <h3>EF SET Standard English Certificate</h3>
                   <ul>
                     <li><strong>Reading & Listening Proficiency:</strong> Scored C2 Proficient (72/100) — demonstrating
@@ -995,34 +1183,91 @@
       <div class="page-content">
         <h1 class="page-title">Work <span>Portfolio</span></h1>
         <p class="page-subtitle">Samples from my real work. Each one shows the process and the results.</p>
+        <!-- HOW TO ADD SAMPLES: each box below has a <div class="sample-gallery">.
+             Copy any "sample-item" block inside it and change the file path + caption.
+             Image  -> <img src="images/...png">        Video -> <video src="videos/...mp4">
+             Text   -> <div class="sample-text" data-src="texts/...txt">
+             Delete any item you don't need. Use lowercase file names, no spaces. -->
 
-        <div class="services-grid">
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: video annotation<br>(images/portfolio/video-annotation.png)</span>
-              <img src="images/portfolio/video-annotation.png" alt="Video Annotation & QA" onerror="this.style.display='none'">
-            </div>
+        <div class="services-grid sample-grid">
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Sample 01</div>
-            <h3>Video Annotation & QA</h3>
+            <h3>Video Annotation &amp; QA</h3>
             <p>Segmenting first-person wearable-camera footage into task-based episodes, classifying each cut against structured criteria, and logging metadata such as categories, object attributes, and summary captions. Includes QA review of peer annotations to catch oversegmentation and timestamp errors.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: Google Sheet<br>(images/portfolio/sports-data-audit.png)</span>
-              <img src="images/portfolio/sports-data-audit.png" alt="Sports Data Research & Audit Specialist" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/video-annotation-1.png)</span>
+                  <img src="images/portfolio/video-annotation-1.png" alt="Episode segmentation" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Episode segmentation</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/video-annotation-2.png)</span>
+                  <img src="images/portfolio/video-annotation-2.png" alt="Metadata logging" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Metadata logging</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/video-annotation-3.png)</span>
+                  <img src="images/portfolio/video-annotation-3.png" alt="QA review of peer annotations" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">QA review of peer annotations</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Sample 02</div>
-            <h3>Sports Data Research & Audit Specialist</h3>
+            <h3>Sports Data Research &amp; Audit Specialist</h3>
             <p>A researched database of 300+ organizations, with multiple verified data points per profile. Roster data was audited for missing information and marked with standardized flags, backed by research notes and audit logs showing the source and verification status of every entry.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: follower growth / analytics<br>(images/portfolio/social-growth.png)</span>
-              <img src="images/portfolio/social-growth.png" alt="Social Media Manager" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/sports-data-audit-1.png)</span>
+                  <img src="images/portfolio/sports-data-audit-1.png" alt="Organization database" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Organization database</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/sports-data-audit-2.png)</span>
+                  <img src="images/portfolio/sports-data-audit-2.png" alt="Roster audit flags" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Roster audit flags</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Sample 03</div>
             <h3>Social Media Manager</h3>
             <p>Daily scheduling, community engagement, and moderation across LinkedIn, Facebook, and Instagram in a consistent brand voice. Audience growth passed 10,000 followers and unlocked all platform monetization features for the client.</p>
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/social-growth-1.png)</span>
+                  <img src="images/portfolio/social-growth-1.png" alt="Follower growth" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Follower growth</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/portfolio/social-growth-2.png)</span>
+                  <img src="images/portfolio/social-growth-2.png" alt="Analytics overview" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Analytics overview</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1036,60 +1281,162 @@
         <h1 class="page-title">Concept <span>Samples</span></h1>
         <p class="page-subtitle">Concept pieces made to show my skills across the roles I offer.</p>
 
-        <div class="services-grid">
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: Canva graphics<br>(images/concepts/canva-graphics.png)</span>
-              <img src="images/concepts/canva-graphics.png" alt="Graphic Design (Canva)" onerror="this.style.display='none'">
-            </div>
+        <div class="services-grid sample-grid">
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 01</div>
             <h3>Graphic Design (Canva)</h3>
             <p>Sample social media graphics, banners, and branded post templates designed in Canva to show layout, color, and typography consistency across a brand feed.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: script text<br>(images/concepts/scriptwriting.png)</span>
-              <img src="images/concepts/scriptwriting.png" alt="Scriptwriting & Copywriting" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/canva-graphics-1.png)</span>
+                  <img src="images/concepts/canva-graphics-1.png" alt="Social media post" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Social media post</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/canva-graphics-2.png)</span>
+                  <img src="images/concepts/canva-graphics-2.png" alt="Banner design" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Banner design</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/canva-graphics-3.png)</span>
+                  <img src="images/concepts/canva-graphics-3.png" alt="Branded template" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Branded template</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 02</div>
-            <h3>Scriptwriting & Copywriting</h3>
+            <h3>Scriptwriting &amp; Copywriting</h3>
             <p>Sample short-form video scripts and post captions written with a clear hook, message, and call to action, adapted to different brand voices and platforms.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: Shopify store page<br>(images/concepts/shopify-store.png)</span>
-              <img src="images/concepts/shopify-store.png" alt="Shopify Sample Store Page" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-text" data-src="texts/concepts/scriptwriting-1.txt">Text file<br>(texts/concepts/scriptwriting-1.txt)</div>
+                <div class="sample-caption">Short-form video script</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-text" data-src="texts/concepts/scriptwriting-2.txt">Text file<br>(texts/concepts/scriptwriting-2.txt)</div>
+                <div class="sample-caption">Post caption copy</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/scriptwriting-1.png)</span>
+                  <img src="images/concepts/scriptwriting-1.png" alt="Script layout" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Script layout</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 03</div>
             <h3>Shopify Sample Store Page</h3>
             <p>A concept storefront with a product page, collection layout, and clean product descriptions, showing basic store setup and page building.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: prospect list / outreach sequence<br>(images/concepts/lead-generation.png)</span>
-              <img src="images/concepts/lead-generation.png" alt="Lead Generation & Outreach Pipeline" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/shopify-store-1.png)</span>
+                  <img src="images/concepts/shopify-store-1.png" alt="Home and collection page" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Home and collection page</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/shopify-store-2.png)</span>
+                  <img src="images/concepts/shopify-store-2.png" alt="Product page" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Product page</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Video<br>(videos/concepts/shopify-walkthrough.mp4)</span>
+                  <video src="videos/concepts/shopify-walkthrough.mp4" controls playsinline preload="metadata" onerror="this.style.display='none'"></video>
+                </div>
+                <div class="sample-caption">Store walkthrough</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 04</div>
-            <h3>Lead Generation & Outreach Pipeline</h3>
+            <h3>Lead Generation &amp; Outreach Pipeline</h3>
             <p>A sample prospect list built with LinkedIn Sales Navigator and Apollo.io, paired with a multi-step outreach message sequence and a simple pipeline tracker. Uses placeholder data only.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: email / ticket templates<br>(images/concepts/support-templates.png)</span>
-              <img src="images/concepts/support-templates.png" alt="Customer Support Reply Templates" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/lead-generation-1.png)</span>
+                  <img src="images/concepts/lead-generation-1.png" alt="Prospect list" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Prospect list</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/lead-generation-2.png)</span>
+                  <img src="images/concepts/lead-generation-2.png" alt="Outreach sequence" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Outreach sequence</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 05</div>
             <h3>Customer Support Reply Templates</h3>
             <p>A set of professional email and ticket response templates for common inquiries, written to keep a consistent brand tone while resolving issues clearly and quickly.</p>
-          </div>
-          <div class="service-card fade-in-item">
-            <div class="sample-img">
-              <span>Screenshot: SOP document<br>(images/concepts/sop-manual.png)</span>
-              <img src="images/concepts/sop-manual.png" alt="SOP & Operations Manual" onerror="this.style.display='none'">
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-text" data-src="texts/concepts/support-template-1.txt">Text file<br>(texts/concepts/support-template-1.txt)</div>
+                <div class="sample-caption">Email reply template</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/support-templates-1.png)</span>
+                  <img src="images/concepts/support-templates-1.png" alt="Ticket response layout" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Ticket response layout</div>
+              </div>
             </div>
+          </div>
+          <div class="service-card sample-card fade-in-item" tabindex="0">
+            <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
+            <div class="sample-img sample-cover"><span>Click to view samples</span></div>
             <div class="sample-tag">Concept 06</div>
-            <h3>SOP & Operations Manual</h3>
+            <h3>SOP &amp; Operations Manual</h3>
             <p>A sample step-by-step standard operating procedure with a criteria checklist and revision log, reflecting the annotation playbook maintenance done in my current role. Content is generic and non-confidential.</p>
+            <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
+            <div class="sample-gallery">
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/sop-manual-1.png)</span>
+                  <img src="images/concepts/sop-manual-1.png" alt="Procedure steps" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Procedure steps</div>
+              </div>
+              <div class="sample-item">
+                <div class="sample-img">
+                  <span>Screenshot<br>(images/concepts/sop-manual-2.png)</span>
+                  <img src="images/concepts/sop-manual-2.png" alt="Criteria checklist and revision log" onerror="this.style.display='none'">
+                </div>
+                <div class="sample-caption">Criteria checklist and revision log</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1433,6 +1780,105 @@
         showPage(link.dataset.page);
       });
     });
+
+    // ── Sample cards: click to expand ──
+    (function () {
+      const OUT_MS = 320;
+      let busy = false;
+
+      document.querySelectorAll('.sample-card').forEach(card => {
+        const count = card.querySelector('.sample-count');
+        if (count) count.textContent = card.querySelectorAll('.sample-item').length;
+        const firstImg = card.querySelector('.sample-item img');
+        const cover = card.querySelector('.sample-cover');
+        if (firstImg && cover) {
+          const im = document.createElement('img');
+          im.alt = '';
+          im.onerror = () => im.remove();
+          im.src = firstImg.getAttribute('src');
+          cover.appendChild(im);
+        }
+      });
+
+      document.querySelectorAll('.sample-text[data-src]').forEach(box => {
+        fetch(box.dataset.src)
+          .then(r => r.ok ? r.text() : Promise.reject())
+          .then(t => { box.textContent = t; box.classList.add('loaded'); })
+          .catch(() => { });
+      });
+
+      function scrollToTop(card) {
+        if (window.innerWidth <= 980) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const pc = card.closest('.page-content');
+          if (pc) pc.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      function othersOf(card) {
+        return [...card.closest('.sample-grid').querySelectorAll('.sample-card')].filter(c => c !== card);
+      }
+
+      function openCard(card) {
+        if (busy || card.classList.contains('open')) return;
+        busy = true;
+        const others = othersOf(card);
+        others.forEach(c => c.classList.add('away'));
+        setTimeout(() => {
+          others.forEach(c => c.classList.add('gone'));
+          card.querySelectorAll('.sample-item').forEach((it, i) => it.style.animationDelay = (i * 80) + 'ms');
+          card.classList.add('open');
+          scrollToTop(card);
+          busy = false;
+        }, OUT_MS);
+      }
+
+      function closeCard(card) {
+        if (busy) return;
+        busy = true;
+        card.querySelectorAll('video').forEach(v => v.pause());
+        const others = othersOf(card);
+        card.classList.remove('open');
+        others.forEach(c => c.classList.remove('gone'));
+        void card.offsetWidth;
+        others.forEach(c => c.classList.remove('away'));
+        scrollToTop(card);
+        setTimeout(() => { busy = false; }, OUT_MS);
+      }
+
+      function resetSamples() {
+        document.querySelectorAll('.sample-card').forEach(c => {
+          c.classList.remove('open', 'away', 'gone');
+          c.querySelectorAll('video').forEach(v => v.pause());
+        });
+        busy = false;
+      }
+
+      document.querySelectorAll('.sample-grid').forEach(grid => {
+        grid.addEventListener('click', e => {
+          const card = e.target.closest('.sample-card');
+          if (!card) return;
+          if (e.target.closest('.sample-close')) { closeCard(card); return; }
+          if (!card.classList.contains('open')) openCard(card);
+        });
+        grid.addEventListener('keydown', e => {
+          const card = e.target.closest('.sample-card');
+          if (card && e.target === card && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            openCard(card);
+          }
+        });
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        const o = document.querySelector('.sample-card.open');
+        if (o) closeCard(o);
+      });
+
+      document.querySelectorAll('[data-page]').forEach(l => l.addEventListener('click', resetSamples));
+    })();
 
     // ── Formspree AJAX submit ──
     const contactForm = document.getElementById('contact-form');
