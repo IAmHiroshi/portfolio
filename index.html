@@ -2356,37 +2356,37 @@
       bg.volume = BG_VOLUME;
       scriptAudio.volume = SCRIPT_VOLUME;
 
-      let userMuted = false;
+      let desiredPlaying = true; // what the user wants — starts true, button toggles it
       let bgWasPlaying = false;
       let duckedByVideo = false;
 
       function setIcon() {
-        icon.className = userMuted ? 'bx bx-volume-mute' : 'bx bx-volume-full';
+        const playing = !bg.paused || !scriptAudio.paused;
+        icon.className = playing ? 'bx bx-pause' : 'bx bx-play';
       }
+      bg.addEventListener('play', setIcon);
+      bg.addEventListener('pause', setIcon);
+      scriptAudio.addEventListener('play', setIcon);
+      scriptAudio.addEventListener('pause', setIcon);
 
       function tryStartBg() {
-        if (userMuted || scriptAudio.getAttribute('src')) return;
+        if (!desiredPlaying || scriptAudio.getAttribute('src')) return;
         bg.play().catch(() => { });
       }
 
-      // Autoplay is usually blocked until a gesture — start on first interaction.
-      function firstGesture() {
-        tryStartBg();
-        window.removeEventListener('pointerdown', firstGesture);
-        window.removeEventListener('keydown', firstGesture);
-      }
-      window.addEventListener('pointerdown', firstGesture, { once: true });
-      window.addEventListener('keydown', firstGesture, { once: true });
+      // Try to autoplay right away; browsers that block it will just stay
+      // paused until the button below gives us a real click.
       tryStartBg();
 
+      // Plain play/pause button — a single click toggles the current state.
       toggleBtn.addEventListener('click', () => {
-        userMuted = !userMuted;
-        setIcon();
-        if (userMuted) {
+        desiredPlaying = !desiredPlaying;
+        if (desiredPlaying) {
+          if (scriptAudio.getAttribute('src')) scriptAudio.play().catch(() => { });
+          else if (!duckedByVideo) tryStartBg();
+        } else {
           bg.pause();
           scriptAudio.pause();
-        } else if (!duckedByVideo) {
-          tryStartBg();
         }
       });
       setIcon();
@@ -2402,7 +2402,7 @@
 
       function unduck() {
         duckedByVideo = false;
-        if (bgWasPlaying && !userMuted) tryStartBg();
+        if (bgWasPlaying && desiredPlaying) tryStartBg();
       }
       document.addEventListener('pause', e => {
         if (e.target.tagName === 'VIDEO') unduck();
@@ -2417,11 +2417,11 @@
         if (src) {
           bg.pause();
           if (scriptAudio.getAttribute('src') !== src) scriptAudio.setAttribute('src', src);
-          if (!userMuted) scriptAudio.play().catch(() => { });
+          if (desiredPlaying) scriptAudio.play().catch(() => { });
         } else {
           scriptAudio.pause();
           scriptAudio.removeAttribute('src');
-          if (!userMuted && !duckedByVideo) tryStartBg();
+          if (desiredPlaying && !duckedByVideo) tryStartBg();
         }
       });
     })();
