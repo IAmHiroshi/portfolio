@@ -601,6 +601,11 @@
 
     .sample-item .sample-img {
       margin-bottom: 8px;
+      cursor: zoom-in;
+    }
+
+    .sample-item .sample-text {
+      cursor: zoom-in;
     }
 
     .sample-item .sample-img img {
@@ -700,6 +705,215 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* ════════════ LIGHTBOX (full-screen sample viewer) ════════════ */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(6, 10, 15, 0.94);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease;
+      padding: 40px;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.94);
+      opacity: 0;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .lightbox.open .lightbox-stage {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .lightbox-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      border: 1px solid rgba(74, 207, 238, 0.25);
+      background: rgba(74, 207, 238, 0.04);
+      box-shadow: 0 0 40px rgba(74, 207, 238, 0.15);
+      overflow: hidden;
+    }
+
+    .lightbox-frame img,
+    .lightbox-frame video {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 20px;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 14px 60px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 13px;
+      background: linear-gradient(to top, rgba(6, 10, 15, 0.85), transparent);
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid #4acfee;
+      background: rgba(14, 18, 23, 0.6);
+      color: #4acfee;
+      font-size: 22px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 2;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      background: #4acfee;
+      color: #0e1217;
+      box-shadow: 0 0 12px #4acfee;
+    }
+
+    .lightbox-close {
+      top: -6px;
+      right: -6px;
+    }
+
+    .lightbox-prev {
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-counter {
+      position: absolute;
+      top: -6px;
+      left: 4px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* ── Text mode: scrolling script viewer ── */
+    .lightbox-frame.text-mode {
+      align-items: stretch;
+      justify-content: stretch;
+      padding: 0;
+    }
+
+    .script-viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 92%, transparent 100%);
+    }
+
+    .script-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding: 18% 12% 60%;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      line-height: 2;
+      white-space: pre-wrap;
+      text-align: center;
+    }
+
+    .script-controls {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 14px;
+      background: linear-gradient(to top, rgba(6, 10, 15, 0.9), transparent);
+    }
+
+    .script-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #4acfee;
+      background: transparent;
+      color: #4acfee;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .script-btn:hover {
+      background: #4acfee;
+      color: #0e1217;
+    }
+
+    .script-progress {
+      width: 120px;
+      height: 4px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+
+    .script-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #4acfee, #53f8c9);
+    }
+
+    @media (max-width: 700px) {
+      .lightbox { padding: 16px; }
+      .lightbox-prev, .lightbox-next { width: 38px; height: 38px; font-size: 18px; }
+      .script-track { font-size: 14px; padding: 22% 8% 60%; }
     }
 
     /* 7 nav items: tighten spacing on mid-size desktops only */
@@ -1710,6 +1924,18 @@
 
   </section>
 
+  <!-- ══ LIGHTBOX (full-screen sample viewer) ══ -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-stage">
+      <div class="lightbox-frame" id="lightbox-frame">
+        <span class="lightbox-counter" id="lightbox-counter"></span>
+        <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+        <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
+        <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -1878,6 +2104,209 @@
       });
 
       document.querySelectorAll('[data-page]').forEach(l => l.addEventListener('click', resetSamples));
+    })();
+
+
+    // ── Lightbox: full-screen sample viewer ──
+    (function () {
+      const lightbox = document.getElementById('lightbox');
+      const frame = document.getElementById('lightbox-frame');
+      const counterEl = document.getElementById('lightbox-counter');
+      const btnClose = document.getElementById('lightbox-close');
+      const btnPrev = document.getElementById('lightbox-prev');
+      const btnNext = document.getElementById('lightbox-next');
+
+      let items = [];
+      let index = 0;
+      let scriptState = null; // { raf, pos, speed, paused, trackEl, viewportEl }
+
+      function stopScript() {
+        if (scriptState && scriptState.raf) cancelAnimationFrame(scriptState.raf);
+        scriptState = null;
+      }
+
+      function stopMedia() {
+        frame.querySelectorAll('video').forEach(v => v.pause());
+        stopScript();
+      }
+
+      function itemsFromCard(card) {
+        return [...card.querySelectorAll('.sample-item')].map(it => {
+          const img = it.querySelector('.sample-img img');
+          const vid = it.querySelector('.sample-img video');
+          const txt = it.querySelector('.sample-text');
+          const cap = it.querySelector('.sample-caption');
+          if (img && img.style.display !== 'none') return { type: 'image', src: img.getAttribute('src'), caption: cap ? cap.textContent : '' };
+          if (vid) return { type: 'video', src: vid.getAttribute('src'), caption: cap ? cap.textContent : '' };
+          if (txt) return { type: 'text', src: txt.dataset.src, node: txt, caption: cap ? cap.textContent : '' };
+          return null;
+        }).filter(Boolean);
+      }
+
+      function renderScript(text) {
+        frame.classList.add('text-mode');
+        frame.innerHTML = `
+          <span class="lightbox-counter" id="lightbox-counter"></span>
+          <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+          <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
+          <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
+          <div class="script-viewport" id="script-viewport">
+            <div class="script-track" id="script-track"></div>
+          </div>
+          <div class="script-controls">
+            <button type="button" class="script-btn" id="script-back"><i class='bx bx-rewind'></i></button>
+            <button type="button" class="script-btn" id="script-play"><i class='bx bx-pause'></i></button>
+            <button type="button" class="script-btn" id="script-fwd"><i class='bx bx-fast-forward'></i></button>
+            <div class="script-progress"><div class="script-progress-fill" id="script-progress-fill"></div></div>
+          </div>
+        `;
+        rewireChrome();
+        const viewport = frame.querySelector('#script-viewport');
+        const track = frame.querySelector('#script-track');
+        const playBtn = frame.querySelector('#script-play');
+        const fill = frame.querySelector('#script-progress-fill');
+        track.textContent = text || 'No script text found for this sample.';
+
+        let pos = viewport.clientHeight * 0.2; // start position matches initial padding feel
+        let paused = false;
+        let speed = 26; // px per second
+
+        function maxScroll() {
+          return Math.max(track.scrollHeight - viewport.clientHeight, 1);
+        }
+
+        function apply() {
+          track.style.transform = `translateY(${-pos}px)`;
+          fill.style.width = Math.min(100, (pos / maxScroll()) * 100) + '%';
+          playBtn.innerHTML = paused ? "<i class='bx bx-play'></i>" : "<i class='bx bx-pause'></i>";
+        }
+
+        let last = null;
+        function tick(ts) {
+          if (last === null) last = ts;
+          const dt = (ts - last) / 1000;
+          last = ts;
+          if (!paused) {
+            pos += speed * dt;
+            if (pos > maxScroll()) pos = maxScroll();
+          }
+          apply();
+          scriptState.raf = requestAnimationFrame(tick);
+        }
+
+        scriptState = { raf: null, get pos() { return pos; }, set pos(v) { pos = Math.max(0, Math.min(v, maxScroll())); } };
+        scriptState.raf = requestAnimationFrame(tick);
+
+        playBtn.addEventListener('click', () => { paused = !paused; apply(); });
+        frame.querySelector('#script-back').addEventListener('click', () => { pos = Math.max(0, pos - 160); paused = true; apply(); });
+        frame.querySelector('#script-fwd').addEventListener('click', () => { pos = Math.min(maxScroll(), pos + 160); paused = true; apply(); });
+
+        viewport.addEventListener('wheel', e => {
+          e.preventDefault();
+          paused = true;
+          pos = Math.max(0, Math.min(maxScroll(), pos + e.deltaY));
+          apply();
+        }, { passive: false });
+
+        let dragY = null;
+        viewport.addEventListener('pointerdown', e => { dragY = e.clientY; paused = true; });
+        window.addEventListener('pointermove', e => {
+          if (dragY === null) return;
+          const dy = e.clientY - dragY;
+          dragY = e.clientY;
+          pos = Math.max(0, Math.min(maxScroll(), pos - dy));
+          apply();
+        });
+        window.addEventListener('pointerup', () => { dragY = null; });
+
+        apply();
+      }
+
+      function renderMedia(item) {
+        frame.classList.remove('text-mode');
+        const el = item.type === 'image'
+          ? `<img src="${item.src}" alt="">`
+          : `<video src="${item.src}" controls autoplay playsinline></video>`;
+        frame.innerHTML = `
+          <span class="lightbox-counter" id="lightbox-counter"></span>
+          <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+          <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
+          <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
+          ${el}
+          ${item.caption ? `<div class="lightbox-caption">${item.caption}</div>` : ''}
+        `;
+        rewireChrome();
+      }
+
+      function rewireChrome() {
+        frame.querySelector('#lightbox-close').addEventListener('click', close);
+        frame.querySelector('#lightbox-prev').addEventListener('click', () => go(-1));
+        frame.querySelector('#lightbox-next').addEventListener('click', () => go(1));
+        const c = frame.querySelector('#lightbox-counter');
+        if (c && items.length > 1) c.textContent = (index + 1) + ' / ' + items.length;
+      }
+
+      function show(i) {
+        stopMedia();
+        index = (i + items.length) % items.length;
+        const item = items[index];
+        if (item.type === 'text') {
+          const cached = item.node.textContent;
+          const loaded = item.node.classList.contains('loaded');
+          if (loaded) {
+            renderScript(cached);
+          } else {
+            renderScript('Loading…');
+            fetch(item.src).then(r => r.ok ? r.text() : Promise.reject()).then(t => {
+              const track = frame.querySelector('#script-track');
+              if (track) track.textContent = t;
+            }).catch(() => {
+              const track = frame.querySelector('#script-track');
+              if (track) track.textContent = 'Could not load this sample text.';
+            });
+          }
+        } else {
+          renderMedia(item);
+        }
+      }
+
+      function go(dir) { show(index + dir); }
+
+      function open(card, startIndex) {
+        items = itemsFromCard(card);
+        if (!items.length) return;
+        show(startIndex || 0);
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        stopMedia();
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.sample-gallery').forEach(gallery => {
+        gallery.addEventListener('click', e => {
+          const item = e.target.closest('.sample-item');
+          if (!item) return;
+          const card = item.closest('.sample-card');
+          if (!card || !card.classList.contains('open')) return;
+          const allItems = [...gallery.querySelectorAll('.sample-item')];
+          open(card, allItems.indexOf(item));
+        });
+      });
+
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) close();
+      });
+
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') go(-1);
+        if (e.key === 'ArrowRight') go(1);
+      });
     })();
 
     // ── Formspree AJAX submit ──
