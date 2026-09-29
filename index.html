@@ -624,6 +624,9 @@
     }
 
     .sample-text {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
       width: 100%;
       aspect-ratio: 16 / 9;
       margin-bottom: 8px;
@@ -704,6 +707,43 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+
+    /* ════════════ BACKGROUND MUSIC TOGGLE ════════════ */
+    .music-toggle {
+      position: fixed;
+      left: 24px;
+      bottom: 24px;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid #4acfee;
+      background: rgba(14, 18, 23, 0.6);
+      color: #4acfee;
+      font-size: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .music-toggle:hover {
+      background: #4acfee;
+      color: #0e1217;
+      box-shadow: 0 0 10px #4acfee;
+    }
+
+    @media (max-width: 700px) {
+      .music-toggle {
+        left: 14px;
+        bottom: 14px;
+        width: 40px;
+        height: 40px;
+        font-size: 17px;
       }
     }
 
@@ -826,15 +866,6 @@
       transform: translateY(-50%);
     }
 
-    .lightbox-counter {
-      position: absolute;
-      top: -6px;
-      left: 4px;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
-
     /* ── Text mode: scrolling script viewer ── */
     .lightbox-frame.text-mode {
       align-items: stretch;
@@ -852,6 +883,9 @@
     }
 
     .script-track {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
       position: absolute;
       left: 0;
       right: 0;
@@ -1400,14 +1434,13 @@
         <!-- HOW TO ADD SAMPLES: each box below has a <div class="sample-gallery">.
              Copy any "sample-item" block inside it and change the file path + caption.
              Image  -> <img src="images/...png">        Video -> <video src="videos/...mp4">
-             Text   -> <div class="sample-text" data-src="texts/...txt">
+             Text   -> <div class="sample-text" data-src="texts/...txt" data-music="audio/....mp3"> (data-music is optional, per-sample background track)
              Delete any item you don't need. Use lowercase file names, no spaces. -->
 
         <div class="services-grid sample-grid">
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Sample 01</div>
             <h3>Video Annotation &amp; QA</h3>
             <p>Segmenting first-person wearable-camera footage into task-based episodes, classifying each cut against structured criteria, and logging metadata such as categories, object attributes, and summary captions. Includes QA review of peer annotations to catch oversegmentation and timestamp errors.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1438,7 +1471,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Sample 02</div>
             <h3>Sports Data Research &amp; Audit Specialist</h3>
             <p>A researched database of 300+ organizations, with multiple verified data points per profile. Roster data was audited for missing information and marked with standardized flags, backed by research notes and audit logs showing the source and verification status of every entry.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1462,7 +1494,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Sample 03</div>
             <h3>Social Media Manager</h3>
             <p>Daily scheduling, community engagement, and moderation across LinkedIn, Facebook, and Instagram in a consistent brand voice. Audience growth passed 10,000 followers and unlocked all platform monetization features for the client.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1499,7 +1530,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 01</div>
             <h3>Graphic Design (Canva)</h3>
             <p>Sample social media graphics, banners, and branded post templates designed in Canva to show layout, color, and typography consistency across a brand feed.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1530,17 +1560,16 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 02</div>
             <h3>Scriptwriting &amp; Copywriting</h3>
             <p>Sample short-form video scripts and post captions written with a clear hook, message, and call to action, adapted to different brand voices and platforms.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
             <div class="sample-gallery">
               <div class="sample-item">
-                <div class="sample-text" data-src="texts/concepts/scriptwriting-1.txt">Text file<br>(texts/concepts/scriptwriting-1.txt)</div>
+                <div class="sample-text" data-src="texts/concepts/scriptwriting-1.txt" data-music="audio/concepts/scriptwriting-1.mp3">Text file<br>(texts/concepts/scriptwriting-1.txt)</div>
                 <div class="sample-caption">Short-form video script</div>
               </div>
               <div class="sample-item">
-                <div class="sample-text" data-src="texts/concepts/scriptwriting-2.txt">Text file<br>(texts/concepts/scriptwriting-2.txt)</div>
+                <div class="sample-text" data-src="texts/concepts/scriptwriting-2.txt" data-music="audio/concepts/scriptwriting-2.mp3">Text file<br>(texts/concepts/scriptwriting-2.txt)</div>
                 <div class="sample-caption">Post caption copy</div>
               </div>
               <div class="sample-item">
@@ -1555,7 +1584,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 03</div>
             <h3>Shopify Sample Store Page</h3>
             <p>A concept storefront with a product page, collection layout, and clean product descriptions, showing basic store setup and page building.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1586,7 +1614,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 04</div>
             <h3>Lead Generation &amp; Outreach Pipeline</h3>
             <p>A sample prospect list built with LinkedIn Sales Navigator and Apollo.io, paired with a multi-step outreach message sequence and a simple pipeline tracker. Uses placeholder data only.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1610,7 +1637,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 05</div>
             <h3>Customer Support Reply Templates</h3>
             <p>A set of professional email and ticket response templates for common inquiries, written to keep a consistent brand tone while resolving issues clearly and quickly.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1631,7 +1657,6 @@
           <div class="service-card sample-card fade-in-item" tabindex="0">
             <button type="button" class="sample-close"><i class='bx bx-arrow-back'></i> Back to all</button>
             <div class="sample-img sample-cover"><span>Click to view samples</span></div>
-            <div class="sample-tag">Concept 06</div>
             <h3>SOP &amp; Operations Manual</h3>
             <p>A sample step-by-step standard operating procedure with a criteria checklist and revision log, reflecting the annotation playbook maintenance done in my current role. Content is generic and non-confidential.</p>
             <div class="sample-more">View samples (<span class="sample-count"></span>) <i class='bx bx-expand-alt'></i></div>
@@ -1924,11 +1949,17 @@
 
   </section>
 
+  <!-- ══ BACKGROUND MUSIC ══ -->
+  <audio id="bg-music" src="audio/background-music.mp3" loop preload="none"></audio>
+  <audio id="script-music" loop preload="none"></audio>
+  <button type="button" class="music-toggle" id="music-toggle" aria-label="Toggle background music">
+    <i class='bx bx-volume-full' id="music-icon"></i>
+  </button>
+
   <!-- ══ LIGHTBOX (full-screen sample viewer) ══ -->
   <div class="lightbox" id="lightbox">
     <div class="lightbox-stage">
       <div class="lightbox-frame" id="lightbox-frame">
-        <span class="lightbox-counter" id="lightbox-counter"></span>
         <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
         <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
         <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
@@ -2027,6 +2058,9 @@
       });
 
       document.querySelectorAll('.sample-text[data-src]').forEach(box => {
+        box.addEventListener('copy', e => e.preventDefault());
+        box.addEventListener('contextmenu', e => e.preventDefault());
+        box.addEventListener('dragstart', e => e.preventDefault());
         fetch(box.dataset.src)
           .then(r => r.ok ? r.text() : Promise.reject())
           .then(t => { box.textContent = t; box.classList.add('loaded'); })
@@ -2111,7 +2145,6 @@
     (function () {
       const lightbox = document.getElementById('lightbox');
       const frame = document.getElementById('lightbox-frame');
-      const counterEl = document.getElementById('lightbox-counter');
       const btnClose = document.getElementById('lightbox-close');
       const btnPrev = document.getElementById('lightbox-prev');
       const btnNext = document.getElementById('lightbox-next');
@@ -2138,7 +2171,7 @@
           const cap = it.querySelector('.sample-caption');
           if (img && img.style.display !== 'none') return { type: 'image', src: img.getAttribute('src'), caption: cap ? cap.textContent : '' };
           if (vid) return { type: 'video', src: vid.getAttribute('src'), caption: cap ? cap.textContent : '' };
-          if (txt) return { type: 'text', src: txt.dataset.src, node: txt, caption: cap ? cap.textContent : '' };
+          if (txt) return { type: 'text', src: txt.dataset.src, node: txt, music: txt.dataset.music || null, caption: cap ? cap.textContent : '' };
           return null;
         }).filter(Boolean);
       }
@@ -2146,8 +2179,7 @@
       function renderScript(text) {
         frame.classList.add('text-mode');
         frame.innerHTML = `
-          <span class="lightbox-counter" id="lightbox-counter"></span>
-          <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
           <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
           <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
           <div class="script-viewport" id="script-viewport">
@@ -2166,6 +2198,9 @@
         const playBtn = frame.querySelector('#script-play');
         const fill = frame.querySelector('#script-progress-fill');
         track.textContent = text || 'No script text found for this sample.';
+        track.addEventListener('copy', e => e.preventDefault());
+        track.addEventListener('contextmenu', e => e.preventDefault());
+        track.addEventListener('dragstart', e => e.preventDefault());
 
         let pos = viewport.clientHeight * 0.2; // start position matches initial padding feel
         let paused = false;
@@ -2228,8 +2263,7 @@
           ? `<img src="${item.src}" alt="">`
           : `<video src="${item.src}" controls autoplay playsinline></video>`;
         frame.innerHTML = `
-          <span class="lightbox-counter" id="lightbox-counter"></span>
-          <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
+            <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close"><i class='bx bx-x'></i></button>
           <button type="button" class="lightbox-prev" id="lightbox-prev" aria-label="Previous"><i class='bx bx-chevron-left'></i></button>
           <button type="button" class="lightbox-next" id="lightbox-next" aria-label="Next"><i class='bx bx-chevron-right'></i></button>
           ${el}
@@ -2242,14 +2276,13 @@
         frame.querySelector('#lightbox-close').addEventListener('click', close);
         frame.querySelector('#lightbox-prev').addEventListener('click', () => go(-1));
         frame.querySelector('#lightbox-next').addEventListener('click', () => go(1));
-        const c = frame.querySelector('#lightbox-counter');
-        if (c && items.length > 1) c.textContent = (index + 1) + ' / ' + items.length;
       }
 
       function show(i) {
         stopMedia();
         index = (i + items.length) % items.length;
         const item = items[index];
+        document.dispatchEvent(new CustomEvent('samplemusic', { detail: { src: item.type === 'text' ? (item.music || null) : null } }));
         if (item.type === 'text') {
           const cached = item.node.textContent;
           const loaded = item.node.classList.contains('loaded');
@@ -2282,6 +2315,7 @@
 
       function close() {
         stopMedia();
+        document.dispatchEvent(new CustomEvent('samplemusic', { detail: { src: null } }));
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
       }
@@ -2306,6 +2340,89 @@
         if (e.key === 'Escape') close();
         if (e.key === 'ArrowLeft') go(-1);
         if (e.key === 'ArrowRight') go(1);
+      });
+    })();
+
+
+    // ── Background music (site-wide, ducks for videos and per-sample tracks) ──
+    (function () {
+      const bg = document.getElementById('bg-music');
+      const scriptAudio = document.getElementById('script-music');
+      const toggleBtn = document.getElementById('music-toggle');
+      const icon = document.getElementById('music-icon');
+
+      const BG_VOLUME = 0.22;
+      const SCRIPT_VOLUME = 0.28;
+      bg.volume = BG_VOLUME;
+      scriptAudio.volume = SCRIPT_VOLUME;
+
+      let userMuted = false;
+      let bgWasPlaying = false;
+      let duckedByVideo = false;
+
+      function setIcon() {
+        icon.className = userMuted ? 'bx bx-volume-mute' : 'bx bx-volume-full';
+      }
+
+      function tryStartBg() {
+        if (userMuted || scriptAudio.getAttribute('src')) return;
+        bg.play().catch(() => { });
+      }
+
+      // Autoplay is usually blocked until a gesture — start on first interaction.
+      function firstGesture() {
+        tryStartBg();
+        window.removeEventListener('pointerdown', firstGesture);
+        window.removeEventListener('keydown', firstGesture);
+      }
+      window.addEventListener('pointerdown', firstGesture, { once: true });
+      window.addEventListener('keydown', firstGesture, { once: true });
+      tryStartBg();
+
+      toggleBtn.addEventListener('click', () => {
+        userMuted = !userMuted;
+        setIcon();
+        if (userMuted) {
+          bg.pause();
+          scriptAudio.pause();
+        } else if (!duckedByVideo) {
+          tryStartBg();
+        }
+      });
+      setIcon();
+
+      // Any <video> on the page ducks the background music while it plays.
+      document.addEventListener('play', e => {
+        if (e.target.tagName !== 'VIDEO') return;
+        duckedByVideo = true;
+        bgWasPlaying = !bg.paused;
+        bg.pause();
+        scriptAudio.pause();
+      }, true);
+
+      function unduck() {
+        duckedByVideo = false;
+        if (bgWasPlaying && !userMuted) tryStartBg();
+      }
+      document.addEventListener('pause', e => {
+        if (e.target.tagName === 'VIDEO') unduck();
+      }, true);
+      document.addEventListener('ended', e => {
+        if (e.target.tagName === 'VIDEO') unduck();
+      }, true);
+
+      // Per-sample script music: swaps in while a scripted text sample is open.
+      document.addEventListener('samplemusic', e => {
+        const src = e.detail && e.detail.src;
+        if (src) {
+          bg.pause();
+          if (scriptAudio.getAttribute('src') !== src) scriptAudio.setAttribute('src', src);
+          if (!userMuted) scriptAudio.play().catch(() => { });
+        } else {
+          scriptAudio.pause();
+          scriptAudio.removeAttribute('src');
+          if (!userMuted && !duckedByVideo) tryStartBg();
+        }
       });
     })();
 
