@@ -2356,8 +2356,9 @@
       bg.volume = BG_VOLUME;
       scriptAudio.volume = SCRIPT_VOLUME;
 
-      let desiredPlaying = true; // what the user wants — starts true, button toggles it
-      let bgWasPlaying = false;
+      // desiredPlaying tracks intent, but is only ever set at the moment we
+      // know the real result of a play/pause action — never assumed upfront.
+      let desiredPlaying = false;
       let duckedByVideo = false;
 
       function setIcon() {
@@ -2368,25 +2369,30 @@
       bg.addEventListener('pause', setIcon);
       scriptAudio.addEventListener('play', setIcon);
       scriptAudio.addEventListener('pause', setIcon);
+      bg.addEventListener('error', () => console.warn('Background music failed to load — check that audio/background-music.mp3 exists at that exact path.'));
 
       function tryStartBg() {
-        if (!desiredPlaying || scriptAudio.getAttribute('src')) return;
-        bg.play().catch(() => { });
+        if (scriptAudio.getAttribute('src')) return;
+        bg.play().then(() => { desiredPlaying = true; }).catch(() => { });
       }
 
-      // Try to autoplay right away; browsers that block it will just stay
-      // paused until the button below gives us a real click.
+      // Try to autoplay right away; most browsers block audio with sound
+      // until the visitor interacts, so this quietly no-ops until the
+      // button below gives it a real click.
       tryStartBg();
 
-      // Plain play/pause button — a single click toggles the current state.
+      // Plain play/pause button — always acts on the REAL current state,
+      // so it can never get out of sync with what's actually playing.
       toggleBtn.addEventListener('click', () => {
-        desiredPlaying = !desiredPlaying;
-        if (desiredPlaying) {
-          if (scriptAudio.getAttribute('src')) scriptAudio.play().catch(() => { });
-          else if (!duckedByVideo) tryStartBg();
-        } else {
+        const playingNow = !bg.paused || !scriptAudio.paused;
+        if (playingNow) {
+          desiredPlaying = false;
           bg.pause();
           scriptAudio.pause();
+        } else {
+          desiredPlaying = true;
+          if (scriptAudio.getAttribute('src')) scriptAudio.play().catch(() => { });
+          else if (!duckedByVideo) bg.play().catch(() => { });
         }
       });
       setIcon();
@@ -2395,14 +2401,13 @@
       document.addEventListener('play', e => {
         if (e.target.tagName !== 'VIDEO') return;
         duckedByVideo = true;
-        bgWasPlaying = !bg.paused;
         bg.pause();
         scriptAudio.pause();
       }, true);
 
       function unduck() {
         duckedByVideo = false;
-        if (bgWasPlaying && desiredPlaying) tryStartBg();
+        if (desiredPlaying) tryStartBg();
       }
       document.addEventListener('pause', e => {
         if (e.target.tagName === 'VIDEO') unduck();
